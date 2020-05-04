@@ -579,10 +579,10 @@ class User < Sequel::Model
     if update_in_central
       save(raise_on_failure: true)
     else
-      CartoDB::Logger.warning(message: "Cannot invalidate session")
+      CartoDB::Logger.error(message: "Cannot invalidate session")
     end
   rescue CartoDB::CentralCommunicationFailure, Sequel::ValidationFailed => e
-    CartoDB::Logger.warning(exception: e, message: "Cannot invalidate session")
+    CartoDB::Logger.error(exception: e, message: "Cannot invalidate session")
   end
 
   # Database configuration setup
